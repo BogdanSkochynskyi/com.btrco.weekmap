@@ -1,14 +1,15 @@
 package com.btrco.weekmap.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "event")
-public class Event {
+public class Event implements Serializable{
 
     public enum EventType{
-        DEFAULT_TYPE
+        default_type
     }
 
     @Id

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface EventDAO {
 
-    Event createEvent(Event event);
+    void createEvent(Event event);
 
     Event findEventById(int id);
 
@@ -25,7 +25,7 @@ public interface EventDAO {
 
     List<Event> findEventsByEventType(Event.EventType eventType);
 
-    Event updateEvent(Event event);
+    void updateEvent(Event event);
 
-    boolean deleteEvent(Event event);
+    void deleteEvent(Event event);
 }

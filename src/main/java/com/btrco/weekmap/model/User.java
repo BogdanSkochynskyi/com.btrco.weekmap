@@ -25,6 +25,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+
     @OneToMany(mappedBy = "user")
     private List<Event> createdEvents;
 
@@ -70,16 +71,28 @@ public class User {
     public void setRole(UserRole role) {
         this.role = role;
     }
+//
+//    public List<Event> getCreatedEvents() {
+//        return createdEvents;
+//    }
+//
+//    public void setCreatedEvents(List<Event> createdEvents) {
+//        this.createdEvents = createdEvents;
+//    }
 
-    public List<Event> getCreatedEvents() {
-        return createdEvents;
-    }
 
-    public void setCreatedEvents(List<Event> createdEvents) {
-        this.createdEvents = createdEvents;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                '}';
     }
 
     public enum UserRole {
-        ADMINISTRATOR, MODERATOR, REGISTERED, GUEST
+        administrator, moderator, registered, guest
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserDAO {
 
-    User createUser(User user);
+    void createUser(User user);
 
     User findUserById(int id);
 
@@ -19,7 +19,7 @@ public interface UserDAO {
 
     List<User> findAllUsers();
 
-    User updateUser(User user);
+    void updateUser(User user);
 
-    boolean deleteUser(User user);
+    void deleteUser(User user);
 }

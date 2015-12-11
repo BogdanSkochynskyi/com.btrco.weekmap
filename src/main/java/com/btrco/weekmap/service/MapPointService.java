@@ -5,6 +5,8 @@ import com.btrco.weekmap.model.MapPoint;
 
 import java.util.List;
 
+import static com.btrco.weekmap.dao.MapPointDAOImpl.sessionService;
+
 public class MapPointService {
 
     private static MapPointDAOImpl mapPointDAO;
@@ -14,34 +16,34 @@ public class MapPointService {
     }
 
     public void create(MapPoint mapPoint){
-        mapPointDAO.openCurrentSessionWithTransaction();
+        sessionService.openCurrentSessionWithTransaction();
         mapPointDAO.create(mapPoint);
-        mapPointDAO.closeCurrentSessionWithTransaction();
+        sessionService.closeCurrentSessionWithTransaction();
     }
 
     public void update(MapPoint mapPoint){
-        mapPointDAO.openCurrentSessionWithTransaction();
+        sessionService.openCurrentSessionWithTransaction();
         mapPointDAO.update(mapPoint);
-        mapPointDAO.closeCurrentSessionWithTransaction();
+        sessionService.closeCurrentSessionWithTransaction();
     }
 
     public MapPoint findByID(int id){
-        mapPointDAO.openCurrentSession();
+        sessionService.openCurrentSession();
         MapPoint mapPoint = mapPointDAO.findById(id);
-        mapPointDAO.closeCurrentSession();
+        sessionService.closeCurrentSession();
         return mapPoint;
     }
 
     public void delete(MapPoint mapPoint){
-        mapPointDAO.openCurrentSessionWithTransaction();
+        sessionService.openCurrentSessionWithTransaction();
         mapPointDAO.delete(mapPoint);
-        mapPointDAO.closeCurrentSessionWithTransaction();
+        sessionService.closeCurrentSessionWithTransaction();
     }
 
     public List<MapPoint> findAll(){
-        mapPointDAO.openCurrentSession();
+        sessionService.openCurrentSession();
         List<MapPoint> list = mapPointDAO.findAll();
-        mapPointDAO.closeCurrentSession();
+        sessionService.closeCurrentSession();
         return list;
     }
 
