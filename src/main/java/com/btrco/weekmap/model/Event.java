@@ -34,9 +34,9 @@ public class Event implements Serializable{
     private LocalDateTime dateTimeOfEvent;
     //TODO: add photo. Which type select for it?
 
-    @OneToOne
-    @JoinColumn(name = "mapPoint_id")
-    private MapPoint mapPoint;
+//    @OneToOne
+//    @JoinColumn(name = "mapPoint_id")
+//    private MapPoint mapPoint;
 
     @Column(name = "address")
     private String address;
@@ -78,9 +78,9 @@ public class Event implements Serializable{
         return dateTimeOfEvent;
     }
 
-    public MapPoint getMapPoint() {
-        return mapPoint;
-    }
+//    public MapPoint getMapPoint() {
+//        return mapPoint;
+//    }
 
     public String getAddress() {
         return address;
@@ -110,9 +110,9 @@ public class Event implements Serializable{
         this.dateTimeOfEvent = dateTimeOfEvent;
     }
 
-    public void setMapPoint(MapPoint mapPoint) {
-        this.mapPoint = mapPoint;
-    }
+//    public void setMapPoint(MapPoint mapPoint) {
+//        this.mapPoint = mapPoint;
+//    }
 
     public void setAddress(String address) {
         this.address = address;

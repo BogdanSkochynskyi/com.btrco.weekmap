@@ -1,7 +1,6 @@
 package com.btrco.weekmap.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -26,8 +25,8 @@ public class User {
     private UserRole role;
 
 
-    @OneToMany(mappedBy = "user")
-    private List<Event> createdEvents;
+//    @OneToMany(mappedBy = "user")
+//    private List<Event> createdEvents;
 
     public User() {
     }

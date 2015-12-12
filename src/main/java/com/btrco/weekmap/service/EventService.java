@@ -2,7 +2,6 @@ package com.btrco.weekmap.service;
 
 import com.btrco.weekmap.dao.EventDAOImpl;
 import com.btrco.weekmap.model.Event;
-import com.btrco.weekmap.model.User;
 
 import java.util.List;
 

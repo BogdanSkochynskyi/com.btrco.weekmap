@@ -52,4 +52,29 @@ public class MapPoint {
                 ", lat=" + lat +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MapPoint mapPoint = (MapPoint) o;
+
+        if (id != mapPoint.id) return false;
+        if (Double.compare(mapPoint.lng, lng) != 0) return false;
+        return Double.compare(mapPoint.lat, lat) == 0;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id;
+        temp = Double.doubleToLongBits(lng);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(lat);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }
