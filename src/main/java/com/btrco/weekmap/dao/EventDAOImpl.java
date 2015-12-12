@@ -33,14 +33,17 @@ public class EventDAOImpl implements EventDAO {
         return list;
     }
 
+    //TODO: realistaion
     public List<Event> findEventsByDate(LocalDateTime dateTime) {
         return null;
     }
 
+    //TODO: realistaion
     public List<Event> findEventsByMapPoint(MapPoint mapPoint) {
         return null;
     }
 
+    //TODO: realistaion in service
     public List<Event> findEventsByCreator(User user) {
         return sessionService.getCurrentSession().createQuery("from Event where user = :user").setParameter("user", user).list();
     }
