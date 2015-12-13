@@ -13,7 +13,7 @@ public class Event implements Serializable{
     }
 
     @Id
-    @GeneratedValue(generator = "increment")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
 
@@ -34,9 +34,9 @@ public class Event implements Serializable{
     private LocalDateTime dateTimeOfEvent;
     //TODO: add photo. Which type select for it?
 
-//    @OneToOne
-//    @JoinColumn(name = "mapPoint_id")
-//    private MapPoint mapPoint;
+    @OneToOne
+    @JoinColumn(name = "mapPoint_id")
+    private MapPoint mapPoint;
 
     @Column(name = "address")
     private String address;
@@ -120,5 +120,41 @@ public class Event implements Serializable{
 
     public void setUser(User creator) {
         this.user = creator;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Event event = (Event) o;
+
+        if (id != event.id) return false;
+        if (name != null ? !name.equals(event.name) : event.name != null) return false;
+        if (type != event.type) return false;
+        if (shortDescription != null ? !shortDescription.equals(event.shortDescription) : event.shortDescription != null)
+            return false;
+        if (fullDescription != null ? !fullDescription.equals(event.fullDescription) : event.fullDescription != null)
+            return false;
+        if (dateTimeOfEvent != null ? !dateTimeOfEvent.equals(event.dateTimeOfEvent) : event.dateTimeOfEvent != null)
+            return false;
+        if (mapPoint != null ? !mapPoint.equals(event.mapPoint) : event.mapPoint != null) return false;
+        if (address != null ? !address.equals(event.address) : event.address != null) return false;
+        return !(user != null ? !user.equals(event.user) : event.user != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (shortDescription != null ? shortDescription.hashCode() : 0);
+        result = 31 * result + (fullDescription != null ? fullDescription.hashCode() : 0);
+        result = 31 * result + (dateTimeOfEvent != null ? dateTimeOfEvent.hashCode() : 0);
+        result = 31 * result + (mapPoint != null ? mapPoint.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        return result;
     }
 }

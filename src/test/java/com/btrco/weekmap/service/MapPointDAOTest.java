@@ -1,36 +1,30 @@
 package com.btrco.weekmap.service;
 
+import com.btrco.weekmap.dao.MapPointDAO;
+import com.btrco.weekmap.dao.MapPointDAOImpl;
 import com.btrco.weekmap.model.MapPoint;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-public class MapPointServiceTest {
+public class MapPointDAOTest {
 
-    private MapPointService mapPointService;
+    MapPointDAO mapPointDAO;
 
     @Before
     public void before(){
-        mapPointService = new MapPointService();
-    }
-
-    @Test
-    public void isMapPointServiseNotNull(){
-        assertNotNull(mapPointService);
-    }
-
-    @Test
-    public void isMapPointDAONotNull(){
-        assertNotNull(MapPointService.getMapPointDAO());
+        mapPointDAO = new MapPointDAOImpl();
     }
 
     @Test
     public void isMapPointFinds(){
         int expectedId = 2;
-        MapPoint findedMApPoint = mapPointService.findByID(expectedId);
+        MapPoint findedMApPoint = mapPointDAO.findById(expectedId);
         int actualId = findedMApPoint.getId();
 
         assertEquals(expectedId, actualId);
@@ -42,14 +36,14 @@ public class MapPointServiceTest {
         mapPoint.setLat(111.222);
         mapPoint.setLng(333.444);
 
-        mapPointService.create(mapPoint);
-        MapPoint createdMapPoint = mapPointService.findByID(mapPoint.getId());
+        mapPointDAO.create(mapPoint);
+        MapPoint createdMapPoint = mapPointDAO.findById(mapPoint.getId());
         assertEquals(mapPoint, createdMapPoint);
     }
 
     @Test
     public void isMapPointUpdates(){
-        MapPoint oldMapPoint = mapPointService.findByID(2);
+        MapPoint oldMapPoint = mapPointDAO.findById(2);
         MapPoint newMapPoint = new MapPoint();
 
         newMapPoint.setId(oldMapPoint.getId());
@@ -57,8 +51,8 @@ public class MapPointServiceTest {
         newMapPoint.setLng(oldMapPoint.getLng());
 
         newMapPoint.setLat(newMapPoint.getLat() + 10);
-        mapPointService.update(newMapPoint);
-        MapPoint actual = mapPointService.findByID(newMapPoint.getId());
+        mapPointDAO.update(newMapPoint);
+        MapPoint actual = mapPointDAO.findById(newMapPoint.getId());
         assertEquals(newMapPoint, actual);
     }
 
@@ -70,20 +64,20 @@ public class MapPointServiceTest {
         MapPoint mapPoint1 = new MapPoint();
         mapPoint1.setLat(111.222);
         mapPoint1.setLng(333.444);
-        mapPointService.create(mapPoint);
-        mapPointService.create(mapPoint1);
+        mapPointDAO.create(mapPoint);
+        mapPointDAO.create(mapPoint1);
 
-        List<MapPoint> list = mapPointService.findAll();
+        List<MapPoint> list = mapPointDAO.findAll();
         assertTrue(list.size() > 1);
     }
 
     @Test
     public void isMapPointDeletes(){
-
-        int id = mapPointService.findAll().size();
-        MapPoint mapPoint = mapPointService.findByID(id);
-        mapPointService.delete(mapPoint);
-        MapPoint actual = mapPointService.findByID(id);
+        int id = mapPointDAO.findAll().size();
+        MapPoint mapPoint = mapPointDAO.findById(id);
+        mapPointDAO.delete(mapPoint);
+        MapPoint actual = mapPointDAO.findById(id);
         assertNull(actual);
     }
+
 }

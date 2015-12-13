@@ -19,6 +19,8 @@ public interface EventDAO {
 
     List<Event> findEventsByDate(LocalDateTime dateTime);
 
+    List<Event> findEventsByDatePeriod(LocalDateTime startDateTime, LocalDateTime finishDateTime);
+
     List<Event> findEventsByMapPoint(MapPoint mapPoint);
 
     List<Event> findEventsByCreator(User user);

@@ -1,50 +1,109 @@
 package com.btrco.weekmap.dao;
 
 import com.btrco.weekmap.model.Event;
+import com.btrco.weekmap.model.MapPoint;
 import com.btrco.weekmap.model.User;
-import com.btrco.weekmap.service.SessionService;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
-    public static SessionService sessionService;
+    private Session currentSession;
+    private Transaction currentTransaction;
 
     public UserDAOImpl() {
-        sessionService = new SessionService();
+
     }
 
     public void createUser(User user) {
-        sessionService.getCurrentSession().save(user);
+        openCurrentSessionWithTransaction();
+        getCurrentSession().save(user);
+        closeCurrentSessionWithTransaction();
     }
 
     public User findUserById(int id) {
-        return sessionService.getCurrentSession().get(User.class, id);
+        openCurrentSession();
+        User user = getCurrentSession().get(User.class, id);
+        closeCurrentSession();
+        return user;
     }
 
     public User findUserByEvent(Event event) {
-        return sessionService.getCurrentSession().get(User.class, event);
+        openCurrentSession();
+        User user =  getCurrentSession().get(User.class, event);
+        closeCurrentSession();
+        return user;
     }
 
     public User findUserByEmail(String email) {
-        return (User) sessionService.getCurrentSession().createQuery("from User where email = :email").setParameter("email", email).uniqueResult();
+        openCurrentSession();
+        User user = (User) getCurrentSession().createQuery("from User where email = :email").setParameter("email", email).uniqueResult();
+        closeCurrentSession();
+        return user;
     }
 
     public List<User> findUsersByRole(User.UserRole role) {
-        List<User> list = sessionService.getCurrentSession().createQuery("from User where role = :role").setParameter("role", role).list();
+        openCurrentSession();
+        List<User> list = getCurrentSession().createQuery("from User where role = :role").setParameter("role", role).list();
+        closeCurrentSession();
         return list;
     }
 
     public List<User> findAllUsers() {
-        List<User> list = sessionService.getCurrentSession().createQuery("from User").list();
+        openCurrentSession();
+        List<User> list = getCurrentSession().createQuery("from User").list();
+        closeCurrentSession();
         return list;
     }
 
     public void updateUser(User user) {
-        sessionService.getCurrentSession().update(user);
+        openCurrentSessionWithTransaction();
+        getCurrentSession().update(user);
+        closeCurrentSessionWithTransaction();
     }
 
     public void deleteUser(User user) {
-        sessionService.getCurrentSession().delete(user);
+        openCurrentSessionWithTransaction();
+        getCurrentSession().delete(user);
+        closeCurrentSessionWithTransaction();
+    }
+
+    private SessionFactory getSessionFactory() {
+        Configuration configuration = new Configuration().configure();
+        configuration.addAnnotatedClass(MapPoint.class);
+        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Event.class);
+        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+        SessionFactory sessionFactory = configuration.buildSessionFactory(builder.build());
+        return sessionFactory;
+    }
+
+    public Session openCurrentSession(){
+        currentSession = getSessionFactory().openSession();
+        return currentSession;
+    }
+
+    public Session openCurrentSessionWithTransaction(){
+        currentSession = getSessionFactory().openSession();
+        currentTransaction = currentSession.beginTransaction();
+        return currentSession;
+    }
+
+    public void closeCurrentSession(){
+        currentSession.close();
+    }
+
+    public void closeCurrentSessionWithTransaction(){
+        currentTransaction.commit();
+        currentSession.close();
+    }
+
+    public Session getCurrentSession() {
+        return currentSession;
     }
 }
