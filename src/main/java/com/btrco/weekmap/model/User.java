@@ -1,6 +1,7 @@
 package com.btrco.weekmap.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -11,13 +12,13 @@ public class User {
     @Column(name = "user_id")
     private int id;
 
-    @Column(name = "login")
+    @Column(name = "login", length = 45)
     private String login;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", length = 45)
     private String password;
 
     @Column(name = "role")
@@ -25,8 +26,8 @@ public class User {
     private UserRole role;
 
 
-//    @OneToMany(mappedBy = "user")
-//    private List<Event> createdEvents;
+    @OneToMany(mappedBy = "user")
+    private List<Event> createdEvents;
 
     public User() {
     }
@@ -70,14 +71,14 @@ public class User {
     public void setRole(UserRole role) {
         this.role = role;
     }
-//
-//    public List<Event> getCreatedEvents() {
-//        return createdEvents;
-//    }
-//
-//    public void setCreatedEvents(List<Event> createdEvents) {
-//        this.createdEvents = createdEvents;
-//    }
+
+    public List<Event> getCreatedEvents() {
+        return createdEvents;
+    }
+
+    public void setCreatedEvents(List<Event> createdEvents) {
+        this.createdEvents = createdEvents;
+    }
 
 
     @Override

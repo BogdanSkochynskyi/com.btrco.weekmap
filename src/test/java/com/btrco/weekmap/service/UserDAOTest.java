@@ -1,9 +1,7 @@
 package com.btrco.weekmap.service;
 
-import com.btrco.weekmap.dao.EventDAOImpl;
 import com.btrco.weekmap.dao.UserDAO;
 import com.btrco.weekmap.dao.UserDAOImpl;
-import com.btrco.weekmap.model.Event;
 import com.btrco.weekmap.model.User;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -45,12 +43,12 @@ public class UserDAOTest {
     @Ignore
     @Test
     public void isUserFindsByEvent(){
-        Event expectedEvent = new EventDAOImpl().findEventById(1);
-        User user = userDao.findUserByEvent(expectedEvent);
-        List<Event> actualEvents = new EventDAOImpl().findEventsByCreator(user);
-        for (int i = 0; i < actualEvents.size(); i++) {
-            assertEquals(expectedEvent, actualEvents.get(i));
-        }
+//        Event expectedEvent = new EventDAOImpl().findEventById(1);
+//        User user = userDao.findUserByEvent(expectedEvent);
+//        List<Event> actualEvents = new EventDAOImpl().findEventsByCreator(user);
+//        for (int i = 0; i < actualEvents.size(); i++) {
+//            assertEquals(expectedEvent, actualEvents.get(i));
+//        }
     }
 
     @Test
@@ -74,20 +72,6 @@ public class UserDAOTest {
 
     @Test
     public void isAllUsersFinds(){
-        User user = new User();
-        user.setLogin("testUser" + userDao.findAllUsers().size());
-        user.setPassword("testPassword");
-        user.setEmail("some" +  + userDao.findAllUsers().size() + "@some.com");
-        user.setRole(User.UserRole.registered);
-        userDao.createUser(user);
-
-        User user1 = new User();
-        user1.setLogin("testUser" + userDao.findAllUsers().size());
-        user1.setPassword("testPassword");
-        user1.setEmail("some" +  + userDao.findAllUsers().size() + "@some.com");
-        user1.setRole(User.UserRole.registered);
-        userDao.createUser(user1);
-
         List<User> users = userDao.findAllUsers();
         assertTrue(users.size() > 1);
     }

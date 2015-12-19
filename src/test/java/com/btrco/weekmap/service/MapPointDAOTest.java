@@ -58,15 +58,6 @@ public class MapPointDAOTest {
 
     @Test
     public void isMapPointsFind(){
-        MapPoint mapPoint = new MapPoint();
-        mapPoint.setLat(111.222);
-        mapPoint.setLng(333.444);
-        MapPoint mapPoint1 = new MapPoint();
-        mapPoint1.setLat(111.222);
-        mapPoint1.setLng(333.444);
-        mapPointDAO.create(mapPoint);
-        mapPointDAO.create(mapPoint1);
-
         List<MapPoint> list = mapPointDAO.findAll();
         assertTrue(list.size() > 1);
     }

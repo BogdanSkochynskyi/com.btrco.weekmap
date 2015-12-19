@@ -1,6 +1,7 @@
 package com.btrco.weekmap.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "mappoint")
@@ -16,6 +17,9 @@ public class MapPoint {
     
     @Column(name = "latitude")
     private double lat; // широта
+
+    @OneToMany(mappedBy = "mapPoint")
+    private List<Event> events;
 
     public MapPoint() {
     }
