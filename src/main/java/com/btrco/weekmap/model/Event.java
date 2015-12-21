@@ -1,5 +1,7 @@
 package com.btrco.weekmap.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -24,12 +26,15 @@ public class Event implements Serializable{
     @Enumerated(EnumType.STRING)
     private EventType type;
 
+    @Type(type = "text")
     @Column(name = "shortDescription")
     private String shortDescription;
 
+    @Type(type = "text")
     @Column(name = "description")
     private String fullDescription;
 
+    @Type(type = "timestamp")
     @Column(name = "datetime")
     private LocalDateTime dateTimeOfEvent;
     //TODO: add photo. Which type select for it?
