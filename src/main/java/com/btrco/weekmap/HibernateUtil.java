@@ -17,6 +17,7 @@ public class HibernateUtil {
         cfg.addAnnotatedClass(User.class);
         cfg.addAnnotatedClass(Event.class);
         cfg.addAnnotatedClass(MapPoint.class);
+//        cfg.addAttributeConverter(LocalDateTimeConverter.class);
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder()
                 .applySettings(cfg.getProperties());
         sessionFactory = cfg.buildSessionFactory(builder.build());

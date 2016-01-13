@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -33,6 +34,7 @@ public class Event implements Serializable{
     @Type(type = "text")
     @Column(name = "description")
     private String fullDescription;
+
 
     @Type(type = "timestamp")
     @Column(name = "datetime")
@@ -79,8 +81,8 @@ public class Event implements Serializable{
         return fullDescription;
     }
 
-    public LocalDateTime getDateTimeOfEvent() {
-        return dateTimeOfEvent;
+    public Timestamp getDateTimeOfEvent() {
+        return Timestamp.valueOf(dateTimeOfEvent);
     }
 
     public MapPoint getMapPoint() {
@@ -111,8 +113,8 @@ public class Event implements Serializable{
         this.fullDescription = fullDescription;
     }
 
-    public void setDateTimeOfEvent(LocalDateTime dateTimeOfEvent) {
-        this.dateTimeOfEvent = dateTimeOfEvent;
+    public void setDateTimeOfEvent(Timestamp timestamp) {
+        this.dateTimeOfEvent = timestamp.toLocalDateTime();
     }
 
     public void setMapPoint(MapPoint mapPoint) {
