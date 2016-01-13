@@ -10,6 +10,7 @@ import com.btrco.weekmap.model.User;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import static org.junit.Assert.assertEquals;
@@ -30,7 +31,7 @@ public class EventDAOTest {
         event.setType(Event.EventType.default_type);
         event.setShortDescription("Text short description");
         event.setFullDescription("Text full description");
-        event.setDateTimeOfEvent(LocalDateTime.now());
+        event.setDateTimeOfEvent(Timestamp.valueOf(LocalDateTime.now()));
         event.setMapPoint(mapPoint);
         event.setAddress("Test Address");
         event.setUser(user);

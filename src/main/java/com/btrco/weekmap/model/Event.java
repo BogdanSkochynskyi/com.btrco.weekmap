@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -34,7 +35,7 @@ public class Event implements Serializable{
     @Column(name = "description")
     private String fullDescription;
 
-    @Type(type = "timestamp")
+    @Type(type = "java.sql.Timestamp")
     @Column(name = "datetime")
     private LocalDateTime dateTimeOfEvent;
     //TODO: add photo. Which type select for it?
@@ -79,8 +80,8 @@ public class Event implements Serializable{
         return fullDescription;
     }
 
-    public LocalDateTime getDateTimeOfEvent() {
-        return dateTimeOfEvent;
+    public Timestamp getDateTimeOfEvent() {
+        return Timestamp.valueOf(dateTimeOfEvent);
     }
 
     public MapPoint getMapPoint() {
@@ -111,8 +112,8 @@ public class Event implements Serializable{
         this.fullDescription = fullDescription;
     }
 
-    public void setDateTimeOfEvent(LocalDateTime dateTimeOfEvent) {
-        this.dateTimeOfEvent = dateTimeOfEvent;
+    public void setDateTimeOfEvent(Timestamp dateTimeOfEvent) {
+        this.dateTimeOfEvent = dateTimeOfEvent.toLocalDateTime();
     }
 
     public void setMapPoint(MapPoint mapPoint) {
