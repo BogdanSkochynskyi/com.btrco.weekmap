@@ -31,7 +31,7 @@ public class EventDAOTest {
         event.setType(Event.EventType.default_type);
         event.setShortDescription("Text short description");
         event.setFullDescription("Text full description");
-        event.setDateTimeOfEvent(Timestamp.valueOf(LocalDateTime.now()));
+        event.setDateTimeOfEvent(LocalDateTime.now());
         event.setMapPoint(mapPoint);
         event.setAddress("Test Address");
         event.setUser(user);

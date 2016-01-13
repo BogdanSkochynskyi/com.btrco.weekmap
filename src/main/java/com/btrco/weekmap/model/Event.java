@@ -80,8 +80,9 @@ public class Event implements Serializable{
         return fullDescription;
     }
 
-    public Timestamp getDateTimeOfEvent() {
-        return Timestamp.valueOf(dateTimeOfEvent);
+    public LocalDateTime getDateTimeOfEvent() {
+        return this.dateTimeOfEvent;
+//        return Timestamp.valueOf(dateTimeOfEvent);
     }
 
     public MapPoint getMapPoint() {
@@ -112,8 +113,8 @@ public class Event implements Serializable{
         this.fullDescription = fullDescription;
     }
 
-    public void setDateTimeOfEvent(Timestamp dateTimeOfEvent) {
-        this.dateTimeOfEvent = dateTimeOfEvent.toLocalDateTime();
+    public void setDateTimeOfEvent(LocalDateTime dateTimeOfEvent) {
+        this.dateTimeOfEvent = dateTimeOfEvent;
     }
 
     public void setMapPoint(MapPoint mapPoint) {
