@@ -11,7 +11,7 @@
         <property name="hibernate.connection.password">enter13masterbit</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
         <mapping class="com.btrco.weekmap.model.MapPoint"/>
         <mapping class="com.btrco.weekmap.model.User"/>
