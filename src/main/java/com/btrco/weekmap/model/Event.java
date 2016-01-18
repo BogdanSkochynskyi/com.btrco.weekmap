@@ -4,8 +4,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -36,6 +34,7 @@ public class Event implements Serializable{
     @Column(name = "description")
     private String fullDescription;
 
+    //TODO: divide into date and time two separate columns
     @Temporal(value = TemporalType.TIMESTAMP)
     @Type(type = "java.sql.Timestamp" )
     @Column(name = "datetime")

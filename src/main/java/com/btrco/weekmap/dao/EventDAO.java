@@ -4,7 +4,7 @@ import com.btrco.weekmap.model.Event;
 import com.btrco.weekmap.model.MapPoint;
 import com.btrco.weekmap.model.User;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface EventDAO {
@@ -17,9 +17,11 @@ public interface EventDAO {
 
     List<Event> findAllEvents();
 
-    List<Event> findEventsByDate(LocalDateTime dateTime);
+    //TODO: only date, without time
+    List<Event> findEventsByDate(Timestamp dateTime);
 
-    List<Event> findEventsByDatePeriod(LocalDateTime startDateTime, LocalDateTime finishDateTime);
+    //TODO: only date, without time
+    List<Event> findEventsByDatePeriod(Timestamp startDateTime, Timestamp finishDateTime);
 
     List<Event> findEventsByMapPoint(MapPoint mapPoint);
 

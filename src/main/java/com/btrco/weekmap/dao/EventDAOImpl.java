@@ -7,7 +7,7 @@ import com.btrco.weekmap.model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class EventDAOImpl implements EventDAO {
@@ -46,14 +46,20 @@ public class EventDAOImpl implements EventDAO {
         return list;
     }
 
-    //TODO: realisation
-    public List<Event> findEventsByDate(LocalDateTime dateTime) {
-        return null;
+    public List<Event> findEventsByDate(Timestamp dateTime) {
+        openCurrentSession();
+//        List<Event> list = getCurrentSession().createQuery("from Event where dateTimeOfEvent = " + dateTime).list();
+        List<Event> list = getCurrentSession().createQuery("from Event where dateTimeOfEvent = :datetime").setParameter("datetime", dateTime).list();
+        closeCurrentSession();
+        return list;
     }
 
-    //TODO: realisation
-    public List<Event> findEventsByDatePeriod(LocalDateTime startDateTime, LocalDateTime finishDateTime) {
-        return null;
+    public List<Event> findEventsByDatePeriod(Timestamp startDateTime, Timestamp finishDateTime) {
+        openCurrentSession();
+        List<Event> list = getCurrentSession().createQuery("from Event where dateTimeOfEvent between :startdatetime and :finishdatetime")
+                .setParameter("startdatetime", startDateTime).setParameter("finishdatetime", finishDateTime).list();
+        closeCurrentSession();
+        return list;
     }
 
     public List<Event> findEventsByMapPoint(MapPoint mapPoint) {
