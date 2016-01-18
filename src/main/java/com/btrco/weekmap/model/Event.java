@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "event")
@@ -35,10 +36,10 @@ public class Event implements Serializable{
     @Column(name = "description")
     private String fullDescription;
 
-
-    @Type(type = "timestamp")
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @Type(type = "java.sql.Timestamp" )
     @Column(name = "datetime")
-    private LocalDateTime dateTimeOfEvent;
+    private Date dateTimeOfEvent;
     //TODO: add photo. Which type select for it?
 
     @ManyToOne
@@ -81,8 +82,9 @@ public class Event implements Serializable{
         return fullDescription;
     }
 
-    public Timestamp getDateTimeOfEvent() {
-        return Timestamp.valueOf(dateTimeOfEvent);
+    public Date getDateTimeOfEvent() {
+        return this.dateTimeOfEvent;
+//        return Timestamp.valueOf(dateTimeOfEvent);
     }
 
     public MapPoint getMapPoint() {
@@ -113,8 +115,8 @@ public class Event implements Serializable{
         this.fullDescription = fullDescription;
     }
 
-    public void setDateTimeOfEvent(Timestamp timestamp) {
-        this.dateTimeOfEvent = timestamp.toLocalDateTime();
+    public void setDateTimeOfEvent(Date dateTimeOfEvent) {
+        this.dateTimeOfEvent = dateTimeOfEvent;
     }
 
     public void setMapPoint(MapPoint mapPoint) {
@@ -163,5 +165,20 @@ public class Event implements Serializable{
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", fullDescription='" + fullDescription + '\'' +
+                ", dateTimeOfEvent=" + dateTimeOfEvent +
+                ", mapPoint=" + mapPoint +
+                ", address='" + address + '\'' +
+                ", user=" + user +
+                '}';
     }
 }
